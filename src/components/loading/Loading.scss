@@ -1,0 +1,13 @@
+@import "../../scss/variables/variables.scss";
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  &__icon {
+    height: 4rem;
+    width: 4rem;
+    color: $colortertiary !important;
+  }
+}

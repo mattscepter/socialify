@@ -1,0 +1,32 @@
+.comment {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    flex: 0.8;
+    cursor: pointer;
+    p {
+      font-size: 1.45rem;
+      font-weight: 600;
+      padding-left: 1rem;
+      padding-top: 0.2rem;
+
+      span {
+        font-weight: 400;
+        padding-left: 0.5rem;
+      }
+    }
+  }
+  &__timestamp {
+    margin-top: 0.6rem;
+    flex: 0.2;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgb(172, 172, 172);
+    text-align: right;
+  }
+}

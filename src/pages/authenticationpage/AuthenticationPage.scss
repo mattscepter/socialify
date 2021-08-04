@@ -1,0 +1,38 @@
+@import "../../scss/variables/variables.scss";
+
+.authentication {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+  background-color: $colorbase;
+
+  img {
+    height: 25rem;
+  }
+
+  .divider {
+    height: 50rem;
+    width: 2px;
+    background-color: $colortertiary;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .authentication {
+    flex-direction: column;
+    justify-content: center;
+    img {
+      margin-bottom: 3rem;
+      height: 15rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .authentication {
+    img {
+      height: 10rem;
+    }
+  }
+}

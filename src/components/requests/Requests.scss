@@ -1,0 +1,30 @@
+@import "../../scss/mixin/mixin.scss";
+@import "../../scss/variables/variables.scss";
+
+.rightinfo-bottom {
+  @include shadow;
+  background-color: white;
+  border-radius: 0.7rem;
+  width: 33rem;
+  margin-bottom: 1rem;
+
+  h2 {
+    @include header(2.5rem);
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($colorprimary, $alpha: 0.06);
+  }
+
+  .requests {
+    max-height: 50vh;
+    padding-bottom: 1.5rem;
+    overflow-y: scroll;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .rightinfo-bottom {
+    width: 33rem;
+  }
+}

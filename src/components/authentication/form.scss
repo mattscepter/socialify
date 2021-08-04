@@ -1,0 +1,109 @@
+@import "../../scss/mixin/mixin.scss";
+@import "../../scss/variables/variables.scss";
+
+.authentication__input {
+  @include shadow;
+  border-radius: 0.7rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  border-radius: 1rem;
+
+  h2 {
+    @include header(4rem);
+    margin-bottom: 1rem;
+  }
+
+  &Container {
+    input {
+      @include input;
+    }
+  }
+
+  .error {
+    background-color: rgb(255, 122, 122);
+    margin: 1rem;
+    border-radius: 0.5rem;
+    p {
+      font-size: 1.6rem;
+      padding: 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      color: white;
+    }
+  }
+
+  .primary {
+    @include button(1.2rem);
+  }
+
+  .secondary {
+    @include button(0.9rem);
+  }
+
+  .addimg {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+
+    .imageName {
+      padding-right: 1rem;
+      padding-left: 1rem;
+      max-width: 15rem;
+      font-size: 1.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      font-size: 1.4rem;
+      padding-left: 0.4rem;
+    }
+
+    [type="file"] {
+      height: 0;
+      overflow: hidden;
+      width: 0;
+    }
+
+    [type="file"] + label {
+      background: $colortertiary;
+      border: none;
+      border-radius: 0.5rem;
+      min-width: 12rem;
+      height: 2.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      padding: 0.5rem;
+      padding-left: 0;
+      outline: none;
+      position: relative;
+      transition: all 0.3s;
+      vertical-align: middle;
+
+      &:hover {
+        background-color: $colorsecondry;
+      }
+    }
+  }
+}
+
+textarea {
+  outline-width: 0;
+  border: 0;
+  background-color: white;
+  border-bottom: 1px solid $colortertiary;
+  font-family: "poppins", "sans-serif";
+  font-size: 1.5rem;
+  @include input(0.9rem);
+  padding: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  resize: none;
+}

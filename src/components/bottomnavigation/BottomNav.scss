@@ -1,0 +1,39 @@
+@import "../../scss/variables/variables.scss";
+@import "../../scss/mixin/mixin.scss";
+
+.bottomnav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 7.5rem !important;
+  z-index: 1000000;
+  @include shadow;
+
+  &__icon {
+    font-size: 3.5rem !important;
+  }
+}
+
+.MuiBottomNavigationAction-root {
+  min-width: 4rem !important;
+}
+
+.MuiBottomNavigationAction-root.Mui-selected {
+  color: $colorsecondry !important;
+  transform: scale(1.2) !important;
+  .MuiSvgIcon-root {
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(51, 66, 87, 0.3));
+    filter: drop-shadow(0px 0px 5px rgba(51, 66, 87, 0.3));
+  }
+}
+
+.MuiBottomNavigationAction-root.MuiBottomNavigationAction-iconOnly {
+  padding-top: 1rem !important;
+}
+
+.MuiBadge-colorPrimary {
+  color: $colorbase;
+  background-color: $colortertiary !important;
+  font-size: 1.5rem !important;
+  padding-right: 0.5rem;
+}

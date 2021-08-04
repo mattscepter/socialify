@@ -1,0 +1,75 @@
+@import "../../scss/variables/variables.scss";
+@import "../../scss/mixin/mixin.scss";
+
+.homebody {
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+
+  .homeleftrel {
+    position: relative;
+    margin-right: 1rem;
+    width: 33rem;
+    height: 100vh;
+    top: 1rem;
+
+    .homeleft {
+      position: absolute;
+      top: 0;
+      width: 38rem;
+
+      &__fixed {
+        position: fixed;
+      }
+    }
+  }
+
+  .homemiddle {
+    width: 54rem;
+    margin-bottom: 7.5rem;
+  }
+
+  .homeright {
+    position: relative;
+    margin-left: 1rem;
+    top: 1rem;
+    width: 33rem;
+    height: 100vh;
+
+    &__absolute {
+      position: absolute;
+      top: 0;
+      width: 33rem;
+      .homeright__relative {
+        position: fixed;
+      }
+    }
+  }
+
+  .add__post {
+    position: fixed;
+    top: 80%;
+    left: 61%;
+    transform: translate(-50%);
+    height: 6rem;
+    width: 6rem;
+    z-index: 10000;
+    @include shadow;
+    &Icon {
+      color: $colortertiary;
+      font-size: 7rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .homebody {
+    .homerightrel {
+      width: 30rem;
+
+      .homeright {
+        width: 30rem;
+      }
+    }
+  }
+}

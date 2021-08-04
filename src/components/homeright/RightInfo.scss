@@ -1,0 +1,76 @@
+@import "../../scss/mixin/mixin.scss";
+@import "../../scss/variables/variables.scss";
+
+.rightinfo {
+  &-top {
+    @include shadow;
+    width: 33rem;
+    max-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.7rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+
+    &__header {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: linear-gradient($colortertiary, white);
+
+      &-Avatar {
+        @include shadow;
+      }
+
+      h2 {
+        @include header(2.5rem);
+        padding-bottom: 1rem;
+      }
+    }
+
+    &__middle {
+      padding: 2rem;
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba($color: #858585, $alpha: 0.3);
+
+      h2 {
+        @include header(1.8rem);
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 2.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      &Box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: centre;
+        width: 33%;
+
+        h4 {
+          @include header;
+          font-size: 1.6rem;
+        }
+
+        h5 {
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

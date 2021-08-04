@@ -1,0 +1,32 @@
+@import "./scss/mixin/mixin.scss";
+
+.App {
+  &__add {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    &post {
+      z-index: 1000;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%);
+
+      &Button {
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+        left: 88%;
+        &Icon {
+          font-size: 3.5rem !important;
+        }
+      }
+    }
+  }
+}

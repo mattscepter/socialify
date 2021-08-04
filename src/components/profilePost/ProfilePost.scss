@@ -1,0 +1,83 @@
+@import "../../scss/variables/variables.scss";
+
+.loadingIcon {
+  margin: 3rem;
+  height: 4rem !important;
+  width: 4rem !important;
+  color: $colortertiary !important;
+}
+
+.profilePage__postGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  &Post {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.2rem;
+    height: 17rem;
+    width: 17rem;
+    background-color: $colorbase;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profilePage__postGrid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    &Post {
+      height: 15rem;
+      width: 15rem;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profilePage__postGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    &Post {
+      height: 17rem;
+      width: 17rem;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .profilePage__postGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    &Post {
+      height: 15rem;
+      width: 15rem;
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .profilePage__postGrid {
+    grid-template-columns: 1fr 1fr;
+
+    &Post {
+      height: 17rem;
+      width: 17rem;
+    }
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .profilePage__postGrid {
+  }
+}

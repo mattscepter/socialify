@@ -1,0 +1,55 @@
+@import "../variables/variables.scss";
+
+@mixin header($f: 2rem) {
+  color: $colorprimary;
+  font-weight: 600;
+  font-size: $f;
+}
+
+@mixin shadow {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(51, 66, 87, 0.2);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(51, 66, 87, 0.2);
+  box-shadow: 0px 0px 10px 0px rgba(51, 66, 87, 0.2);
+}
+
+@mixin button($f: 1rem) {
+  height: 4 * $f;
+  min-width: 8 * $f;
+  margin: 1 * $f;
+  background-color: $colortertiary;
+  color: white;
+  font-size: 1.8 * $f;
+  font-family: "poppins", "sans-serif";
+  padding: 0.5 * $f;
+  padding-left: 2.3 * $f;
+  padding-right: 2.3 * $f;
+  font-weight: 400;
+  border-radius: 0.4 * $f;
+  text-transform: capitalize;
+  &:hover {
+    background-color: $colorsecondry;
+  }
+}
+
+@mixin input($f: 1rem) {
+  margin: 1 * $f;
+  width: 30 * $f;
+  height: 4 * $f;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7 * $f;
+  padding: 0.5 * $f;
+  padding-left: 1 * $f;
+  padding-right: 1 * $f;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline-width: 0;
+  &::placeholder {
+    color: lightgray;
+  }
+  &:focus {
+    border: 1px solid $colortertiary;
+    box-shadow: 0px 0px 7px 0px $colortertiary;
+    -webkit-box-shadow: 0px 0px 7px 0px $colortertiary;
+    -moz-box-shadow: 0px 0px 7px 0px $colortertiary;
+  }
+}

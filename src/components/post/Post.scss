@@ -1,0 +1,178 @@
+@import "../../scss/mixin/mixin.scss";
+
+.post {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 54rem;
+  background-color: white;
+  background-color: white;
+  border-radius: 0.7rem;
+  @include shadow;
+  overflow: hidden;
+
+  &__header {
+    padding-left: 1.5rem;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba($colorprimary, $alpha: 0.12);
+    h2 {
+      @include header(1.8rem);
+      padding-left: 1rem;
+    }
+  }
+
+  &__caption {
+    padding-left: 1.5rem;
+    border-bottom: 1px solid rgba($colorprimary, $alpha: 0.08);
+
+    h3 {
+      padding-top: 1rem;
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+
+    p {
+      font-size: 1.5rem;
+      font-weight: 400;
+      padding-bottom: 1rem;
+    }
+  }
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 65vh;
+    overflow: hidden;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__footer {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &Left {
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;
+
+      .icon {
+        font-size: 2.5rem;
+        color: gray;
+      }
+
+      p {
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+      }
+    }
+
+    &Right {
+      padding-right: 1.5rem;
+    }
+  }
+
+  &__timestamp {
+    padding-left: 1.5rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgb(172, 172, 172);
+    border-bottom: 1px solid rgba($colorprimary, $alpha: 0.06);
+  }
+
+  &__comment {
+    padding: 1.5rem;
+    padding-top: 0.8rem;
+
+    &Add {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      textarea {
+        border: 0;
+        outline-width: 0;
+        border-bottom: 1px solid lightgray;
+        font-size: 1.5rem;
+        padding: 0.4rem;
+        width: 60%;
+        font-family: "poppins", "sans-serif";
+        resize: none;
+        height: 2.8rem;
+        border-radius: 0;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        &::placeholder {
+          color: lightgray;
+        }
+        &:focus {
+          border-bottom: 1px solid $colortertiary;
+          -webkit-box-shadow: 0 4px 6px -6px $colortertiary;
+          -moz-box-shadow: 0 4px 6px -6px $colortertiary;
+          box-shadow: 0 4px 6px -6px $colortertiary;
+        }
+      }
+
+      button {
+        height: 4rem;
+        width: 4rem;
+        margin-left: 1.5rem;
+
+        .sendIcon {
+          font-size: 2.5rem;
+        }
+        &:hover .sendIcon {
+          color: $colortertiary;
+        }
+      }
+    }
+  }
+}
+
+.accordian {
+  &__header {
+    background-color: lightgray !important;
+    h3 {
+      font-size: 1.6rem;
+      font-size: 500;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    max-height: 15rem !important;
+    overflow-y: scroll;
+  }
+}
+
+.MuiAccordion-root.Mui-expanded {
+  margin: 0 !important;
+}
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: 48px !important;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin: 0 !important;
+}
+
+.MuiAccordionDetails-root {
+  padding-left: 1.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+@media screen and (max-width: 400px) {
+  .post {
+    width: 100vw;
+  }
+}

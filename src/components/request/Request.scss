@@ -1,0 +1,30 @@
+@import "../../scss/mixin/mixin.scss";
+@import "../../scss/variables/variables.scss";
+
+.request {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-top: 1rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    p {
+      font-size: 1.45rem;
+      font-weight: 600;
+      padding-left: 1rem;
+      padding-top: 0.2rem;
+    }
+  }
+
+  &__button {
+    align-items: center;
+    display: flex;
+
+    button {
+      @include button(0.6rem);
+    }
+  }
+}

@@ -1,0 +1,159 @@
+@import "../../scss/variables/variables.scss";
+@import "../../scss/mixin/mixin.scss";
+
+.leftinfo {
+  @include shadow;
+  width: 33rem;
+  background-color: white;
+  border-radius: 0.7rem;
+
+  .addpost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      @include header(2.8rem);
+      padding-top: 1.3rem;
+      padding-bottom: 1.3rem;
+      border-bottom: 1px solid rgba($colorprimary, $alpha: 0.06);
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+
+      label {
+        font-size: 2rem;
+        color: black;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+        margin-left: 1rem;
+      }
+
+      input {
+        @include input(0.9rem);
+      }
+    }
+
+    .caption {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      padding-top: 0rem;
+
+      label {
+        font-size: 2rem;
+        color: black;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+        margin-left: 1rem;
+      }
+
+      textarea {
+        outline-width: 0;
+        border: 0;
+        background-color: white;
+        border-bottom: 1px solid $colortertiary;
+        font-family: "poppins", "sans-serif";
+        font-size: 1.5rem;
+        @include input(0.9rem);
+        padding: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        resize: none;
+      }
+    }
+
+    .error {
+      width: 32.3rem;
+      margin-top: 2rem;
+      background-color: rgb(255, 122, 122);
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 0.5rem;
+      p {
+        font-size: 1.6rem;
+        padding: 1.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        color: white;
+      }
+    }
+
+    .addimg {
+      display: flex;
+      align-items: center;
+      margin-top: 0rem;
+      margin-left: 2rem;
+
+      .imageName {
+        padding-right: 1rem;
+        padding-left: 1rem;
+        max-width: 15rem;
+        font-size: 1.3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p {
+        font-size: 1.4rem;
+        padding-left: 0.4rem;
+      }
+
+      [type="file"] {
+        height: 0;
+        overflow: hidden;
+        width: 0;
+      }
+
+      [type="file"] + label {
+        background: $colortertiary;
+        border: none;
+        border-radius: 0.5rem;
+        min-width: 12rem;
+        height: 2.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        cursor: pointer;
+        padding: 0.5rem;
+        padding-left: 0;
+        outline: none;
+        position: relative;
+        transition: all 0.3s;
+        vertical-align: middle;
+
+        &:hover {
+          background-color: $colorsecondry;
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+      margin-right: 1.2rem;
+      button {
+        @include button;
+        width: 13rem !important;
+      }
+    }
+  }
+
+  .post__preview {
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .leftinfo {
+  }
+}
