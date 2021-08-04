@@ -71,7 +71,7 @@ function App() {
         });
     };
     getfollow();
-  }, [user.userId, accepted]);
+  }, [user, accepted]);
 
   return (
     <div className="App">
