@@ -45,8 +45,8 @@ function App() {
         })
         .then((res) => {
           const socket = io.connect(process.env.REACT_APP_BASE_URL);
-          socket.emit("addUser", res.data.user.userId);
           dispatch(loginSuccess({ userData: res.data.user, socket: socket }));
+          socket.emit("addUser", res.data.user.userId);
         })
         .catch((err) => {
           if (err.response) {
