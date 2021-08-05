@@ -16,7 +16,7 @@ import Requests from "./components/requests/Requests";
 import { fetchUserToken } from "./context/actions/authactions";
 
 function App() {
-  const loading = useSelector((state) => state.auth.loading);
+  const loading = useSelector((state) => state.auth.getuserloading);
   const authstate = useSelector((state) => state.auth.authstate);
   const dispatch = useDispatch();
   const [addPostDisp, setAddPostDisp] = useState(false);

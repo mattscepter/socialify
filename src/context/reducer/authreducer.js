@@ -5,9 +5,11 @@ import {
   LOGOUT_USER,
   POSTED,
   ACCEPTED,
+  GETUSER_LOADING,
 } from "../actionsTypes";
 
 const initialState = {
+  getuserloading: false,
   loading: false,
   user: [],
   error: "",
@@ -19,6 +21,11 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GETUSER_LOADING:
+      return {
+        ...state,
+        getuserloading: true,
+      };
     case LOGIN_LOADING:
       return {
         ...state,
@@ -29,6 +36,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         authstate: true,
         loading: false,
+        getuserloading: false,
         user: action.payload.userData,
         error: "",
         socket: action.payload.socket,
@@ -37,6 +45,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        getuserloading: false,
         user: [],
         error: action.payload,
         authstate: false,
@@ -46,6 +55,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        getuserloading: false,
         user: [],
         error: "",
         authstate: false,

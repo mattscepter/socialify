@@ -5,11 +5,15 @@ import {
   LOGOUT_USER,
   POSTED,
   ACCEPTED,
+  GETUSER_LOADING,
 } from "../actionsTypes";
 import cookie from "js-cookie";
 import axiosInstance from "../../utils/axiosInstance";
 import io from "socket.io-client";
 
+const getuserloading = () => ({
+  type: GETUSER_LOADING,
+});
 const loginLoading = () => ({
   type: LOGIN_LOADING,
 });
@@ -60,7 +64,7 @@ const loginUser = (user) => {
 
 const fetchUserToken = () => {
   return (dispatch) => {
-    dispatch(loginLoading());
+    dispatch(getuserloading());
     const headers = {
       authorization: cookie.get("jwt"),
     };
@@ -91,4 +95,5 @@ export {
   accepted,
   fetchUserToken,
   loginUser,
+  getuserloading,
 };

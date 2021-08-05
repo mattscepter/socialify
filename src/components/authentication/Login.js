@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../context/actions/authactions";
 
 const Login = ({ auth }) => {
-  const authstate = useSelector((state) => state.authstate);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const authstate = useSelector((state) => state.auth.authstate);
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
   const history = useHistory();
   const [user, setUSer] = useState({
@@ -57,7 +57,7 @@ const Login = ({ auth }) => {
           value={user.password}
         />
       </div>
-      {error !== "" ? (
+      {error !== "" && error !== undefined ? (
         <div className="error">
           <p>!! {error}</p>
         </div>
