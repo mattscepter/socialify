@@ -22,7 +22,7 @@ function Header() {
   const socket = useSelector((state) => state.auth.socket);
   const [display, setdisplay] = useState(false);
 
-  const mobile = useMediaQuery("(max-width:650px)");
+  const mobile = useMediaQuery("(max-width:710px)");
 
   useEffect(() => {
     socket.emit("find_user", search);

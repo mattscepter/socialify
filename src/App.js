@@ -25,7 +25,7 @@ function App() {
   const user = useSelector((state) => state.auth.user);
   const accepted = useSelector((state) => state.auth.accepted);
 
-  const mobile = useMediaQuery("(max-width:650px)");
+  const mobile = useMediaQuery("(max-width:710px)");
 
   useEffect(() => {
     dispatch(fetchUserToken());

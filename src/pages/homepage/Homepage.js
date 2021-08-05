@@ -15,8 +15,8 @@ function Homepage() {
   const posted = useSelector((state) => state.auth.posted);
   const accepted = useSelector((state) => state.auth.accepted);
 
-  const tablet = useMediaQuery("(max-width:950px)");
-  const mobile = useMediaQuery("(max-width:650px)");
+  const tablet = useMediaQuery("(max-width:1073px)");
+  const mobile = useMediaQuery("(max-width:710px)");
 
   useEffect(() => {
     const getfollow = async () => {
