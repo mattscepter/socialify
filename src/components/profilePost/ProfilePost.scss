@@ -66,6 +66,17 @@
   }
 }
 
+@media screen and (max-width: 380px) {
+  .profilePage__postGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    &Post {
+      height: 14rem;
+      width: 14rem;
+    }
+  }
+}
+
 @media screen and (max-width: 350px) {
   .profilePage__postGrid {
     grid-template-columns: 1fr 1fr;

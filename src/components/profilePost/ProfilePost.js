@@ -30,6 +30,9 @@ function ProfilePost({ user, setpostdeleted, setpostSelected }) {
         });
     };
     getPost();
+    return function cleanup() {
+      getPost();
+    };
   }, [user]);
 
   return (
@@ -55,6 +58,7 @@ function ProfilePost({ user, setpostdeleted, setpostSelected }) {
                 {userPost.map((post) => {
                   return (
                     <div
+                      key={post._id}
                       className="profilePage__postGridPost"
                       onClick={() => {
                         setSelectedPost(true);

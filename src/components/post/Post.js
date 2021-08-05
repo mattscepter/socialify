@@ -50,6 +50,9 @@ function Post({ postdata }) {
         });
     };
     getUser();
+    return function cleanup() {
+      getUser();
+    };
   }, [postdata.userId, postdata._id]);
 
   useEffect(() => {}, [likes]);
