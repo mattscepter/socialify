@@ -1,18 +1,12 @@
 import { Button, CircularProgress } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./form.scss";
-import axiosInstance from "../../utils/axiosInstance";
-import cookie from "js-cookie";
 import { useHistory } from "react-router-dom";
-import {
-  loginLoading,
-  loginSuccess,
-  loginError,
-} from "../../context/actions/authactions";
 import { useSelector, useDispatch } from "react-redux";
-import io from "socket.io-client";
+import { loginUser } from "../../context/actions/authactions";
 
 const Login = ({ auth }) => {
+  const authstate = useSelector((state) => state.authstate);
   const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
@@ -22,32 +16,24 @@ const Login = ({ auth }) => {
     password: "",
   });
 
+  useEffect(() => {
+    if (authstate) {
+      history.push("/");
+    } else if (error !== "") {
+      setUSer({
+        user: "",
+        password: "",
+      });
+    }
+  }, [authstate, error, history]);
+
   const handleInput = (e) => {
     setUSer({ ...user, [e.target.name]: e.target.value });
   };
 
   const login = async (e) => {
     e.preventDefault();
-    dispatch(loginLoading());
-    await axiosInstance
-      .post("/auth/signin", user)
-      .then((res) => {
-        console.log("loggedin");
-        if (res.data.token) {
-          const socket = io.connect(process.env.REACT_APP_BASE_URL);
-          socket.emit("addUser", res.data.user.userId);
-          dispatch(loginSuccess({ userData: res.data.user, socket: socket }));
-          cookie.set("jwt", res.data.token, { expires: 1 });
-        }
-        history.push("/");
-      })
-      .catch((err) => {
-        if (err.response) dispatch(loginError(err.response.data.error));
-        setUSer({
-          user: "",
-          password: "",
-        });
-      });
+    dispatch(loginUser(user));
   };
 
   return (

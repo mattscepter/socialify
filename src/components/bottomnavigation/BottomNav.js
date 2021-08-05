@@ -2,7 +2,7 @@ import React from "react";
 import "./BottomNav.scss";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import { Avatar, Badge, IconButton } from "@material-ui/core";
+import { Avatar, Badge } from "@material-ui/core";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import HomeIcon from "@material-ui/icons/Home";
 import ChatRoundedIcon from "@material-ui/icons/ChatRounded";
@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 function BottomNav({ setAddPostDisp, setrequestsdisp, requests }) {
   const history = useHistory();
-  const currentUser = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.auth.user);
 
   return (
     <div>
@@ -24,18 +24,14 @@ function BottomNav({ setAddPostDisp, setrequestsdisp, requests }) {
         <BottomNavigationAction
           icon={<ChatRoundedIcon className="bottomnav__icon" />}
         />
-        <IconButton
+        <BottomNavigationAction
           onClick={() => setAddPostDisp(true)}
-          style={{ minWidth: "10rem" }}
-        >
-          <AddCircleRoundedIcon
-            style={{ fontSize: "6rem", color: "#476072" }}
-          />
-        </IconButton>
-        {/* <BottomNavigationAction
-          onClick={() => setAddPostDisp(true)}
-          icon={<AddCircleRoundedIcon style={{ fontSize: "5rem" }} />}
-        /> */}
+          icon={
+            <AddCircleRoundedIcon
+              style={{ fontSize: "6rem", color: "#476072" }}
+            />
+          }
+        />
 
         <BottomNavigationAction
           onClick={() => setrequestsdisp(true)}

@@ -18,8 +18,8 @@ function Header() {
   const [searchedUser, setsearchedUser] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
-  const currentUser = useSelector((state) => state.user);
-  const socket = useSelector((state) => state.socket);
+  const currentUser = useSelector((state) => state.auth.user);
+  const socket = useSelector((state) => state.auth.socket);
   const [display, setdisplay] = useState(false);
 
   const mobile = useMediaQuery("(max-width:650px)");

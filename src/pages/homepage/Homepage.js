@@ -11,9 +11,9 @@ import { useSelector } from "react-redux";
 function Homepage() {
   const [follow, setfollow] = useState({});
   const [postcount, setpostcount] = useState();
-  const user = useSelector((state) => state.user);
-  const posted = useSelector((state) => state.posted);
-  const accepted = useSelector((state) => state.accepted);
+  const user = useSelector((state) => state.auth.user);
+  const posted = useSelector((state) => state.auth.posted);
+  const accepted = useSelector((state) => state.auth.accepted);
 
   const tablet = useMediaQuery("(max-width:950px)");
   const mobile = useMediaQuery("(max-width:650px)");

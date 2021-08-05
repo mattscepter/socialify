@@ -12,7 +12,7 @@ import { CircularProgress } from "@material-ui/core";
 
 function ProfilePage() {
   const [editDisplay, seteditDisplay] = useState(false);
-  const currentUser = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.auth.user);
   const [follow, setfollow] = useState({});
   const [postcount, setpostcount] = useState();
   const [buttonStatus, setButtonStatus] = useState("Follow");

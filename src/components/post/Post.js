@@ -21,7 +21,7 @@ function Post({ postdata }) {
   const [commentLoading, setCommmentLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const User = useSelector((state) => state.user);
+  const User = useSelector((state) => state.auth.user);
   const history = useHistory();
   const baseURL = `${process.env.REACT_APP_UPLOAD}/posts/${postdata.imgPath}`;
 
@@ -153,9 +153,12 @@ function Post({ postdata }) {
             </>
           ) : (
             <>
-              {" "}
               <Avatar
-                src={`${process.env.REACT_APP_UPLOAD}/profilepic/${user.profileImg}`}
+                src={`${
+                  user.profileImg !== ""
+                    ? `${process.env.REACT_APP_UPLOAD}/profilepic/${user.profileImg}`
+                    : ""
+                }`}
                 style={{ height: "3rem", width: "3rem" }}
               />
               <h2>{user.userName}</h2>
@@ -195,7 +198,7 @@ function Post({ postdata }) {
             </>
           )}
         </div>
-        {postdata !== "" ? (
+        {postdata.imgPath !== "" ? (
           <div className="post__image">
             <img src={baseURL} alt="" />
           </div>
@@ -247,8 +250,6 @@ function Post({ postdata }) {
         <div className="post__comment">
           <div className="post__commentAdd">
             <textarea
-              cols="30"
-              minRows="1"
               type="text"
               placeholder="Add Comment"
               value={comment}

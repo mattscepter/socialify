@@ -103,8 +103,6 @@ function UserData({ auth, userId }) {
 
       <div className="authentication__inputContainer">
         <TextareaAutosize
-          cols="30"
-          minRows="1"
           placeholder="Description"
           value={disc}
           onChange={(e) => setdisc(e.target.value)}

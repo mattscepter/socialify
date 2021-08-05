@@ -11,7 +11,7 @@ import { posted } from "../../context/actions/authactions";
 
 function LeftInfo() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [post, setPost] = useState({
@@ -89,8 +89,6 @@ function LeftInfo() {
             <div className="caption">
               <label>Caption: </label>
               <TextareaAutosize
-                cols="30"
-                minRows="1"
                 placeholder="Enter your caption"
                 value={post.caption}
                 onChange={(e) => setPost({ ...post, caption: e.target.value })}

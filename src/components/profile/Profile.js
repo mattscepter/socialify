@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Post from "../post/Post";
 
 function Profile({ setDisplay, post, user, postdeleted, setpostSelected }) {
-  const User = useSelector((state) => state.user);
+  const User = useSelector((state) => state.auth.user);
   const [likes, setLikes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const [likenumber, setLikeNumber] = useState();

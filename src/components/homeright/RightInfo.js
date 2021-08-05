@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 function RightInfo({ postcount, follow }) {
   const history = useHistory();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <div className="rightinfo">

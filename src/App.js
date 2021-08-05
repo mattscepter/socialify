@@ -7,56 +7,28 @@ import { useSelector, useDispatch } from "react-redux";
 import ProfilePage from "./pages/profilepage/ProfilePage";
 import Header from "./components/header/Header";
 import { useEffect, useState } from "react";
-import cookie from "js-cookie";
 import axiosInstance from "./utils/axiosInstance";
-import {
-  loginLoading,
-  loginSuccess,
-  loginError,
-} from "./context/actions/authactions";
 import Loading from "./components/loading/Loading";
-import io from "socket.io-client";
 import { IconButton, useMediaQuery } from "@material-ui/core";
 import LeftInfo from "./components/homeleft/LeftInfo";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 import Requests from "./components/requests/Requests";
+import { fetchUserToken } from "./context/actions/authactions";
 
 function App() {
-  const loading = useSelector((state) => state.loading);
-  const authstate = useSelector((state) => state.authstate);
+  const loading = useSelector((state) => state.auth.loading);
+  const authstate = useSelector((state) => state.auth.authstate);
   const dispatch = useDispatch();
   const [addPostDisp, setAddPostDisp] = useState(false);
   const [requestsdisp, setrequestsdisp] = useState(false);
   const [follow, setfollow] = useState({});
-  const user = useSelector((state) => state.user);
-  const accepted = useSelector((state) => state.accepted);
+  const user = useSelector((state) => state.auth.user);
+  const accepted = useSelector((state) => state.auth.accepted);
 
   const mobile = useMediaQuery("(max-width:650px)");
 
   useEffect(() => {
-    const callChatPage = async () => {
-      dispatch(loginLoading());
-      const headers = {
-        authorization: cookie.get("jwt"),
-      };
-      await axiosInstance
-        .get("/auth/homepage", {
-          headers,
-        })
-        .then((res) => {
-          const socket = io.connect(process.env.REACT_APP_BASE_URL);
-          socket.emit("addUser", res.data.user.userId);
-          dispatch(loginSuccess({ userData: res.data.user, socket: socket }));
-        })
-        .catch((err) => {
-          if (err.response) {
-            dispatch(loginError(err.response.data.error));
-          }
-          console.log(err);
-        });
-    };
-
-    callChatPage();
+    dispatch(fetchUserToken());
   }, [dispatch]);
 
   useEffect(() => {

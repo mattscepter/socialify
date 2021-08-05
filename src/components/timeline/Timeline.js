@@ -1,35 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Timeline.scss";
 import Post from "../post/Post";
-import { useSelector } from "react-redux";
-import axiosInstance from "../../utils/axiosInstance";
+import { useSelector, useDispatch } from "react-redux";
 import Loading from "../../components/loading/Loading";
+import { getPosts } from "../../context/actions/postactions";
 
 function Timeline() {
-  const posted = useSelector((state) => state.posted);
-  const user = useSelector((state) => state.user);
-  const [post, setPost] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const posted = useSelector((state) => state.auth.posted);
+  const user = useSelector((state) => state.auth.user);
+  const post = useSelector((state) => state.posts.posts);
+  const loading = useSelector((state) => state.posts.loading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getPost = async () => {
-      setLoading(true);
-      await axiosInstance
-        .get(`/post/getposts/${user.userId}`)
-        .then((res) => {
-          setPost(
-            res.data.sort((p1, p2) => {
-              return new Date(p2.createdAt) - new Date(p1.createdAt);
-            })
-          );
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getPost();
-  }, [user.userId, posted]);
+    dispatch(getPosts(user));
+  }, [dispatch, user, posted]);
 
   return (
     <>
@@ -44,6 +29,7 @@ function Timeline() {
                 marginTop: "2rem",
                 fontWeight: "500",
                 color: "gray",
+                textAlign: "center",
               }}
             >
               No post available
