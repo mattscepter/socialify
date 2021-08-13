@@ -57,7 +57,9 @@ const Login = ({ auth }) => {
           value={user.password}
         />
       </div>
-      {error !== "" && error !== undefined ? (
+      {error !== "" &&
+      error !== undefined &&
+      error !== "Unauthorized: No token provided" ? (
         <div className="error">
           <p>!! {error}</p>
         </div>

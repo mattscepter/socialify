@@ -5,7 +5,8 @@ import Request from "../request/Request";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 function Requests({ follow, followerLoading, setFollowed }) {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
+  const follower = useSelector((state) => state.follower);
 
   return (
     <div className="rightinfo-bottom">
@@ -46,7 +47,7 @@ function Requests({ follow, followerLoading, setFollowed }) {
         ) : (
           <>
             {" "}
-            {follow.requests?.length === 0 ? (
+            {follower.requests?.length === 0 ? (
               <p
                 style={{
                   textAlign: "center",
@@ -59,7 +60,7 @@ function Requests({ follow, followerLoading, setFollowed }) {
               </p>
             ) : (
               <>
-                {follow.requests?.map((request) => {
+                {follower.requests?.map((request) => {
                   return (
                     <Request
                       request={request}

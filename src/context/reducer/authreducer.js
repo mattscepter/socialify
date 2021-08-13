@@ -3,20 +3,20 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_USER,
-  POSTED,
-  ACCEPTED,
   GETUSER_LOADING,
+  EDIT_DATA,
+  ONLINE_USERS,
 } from "../actionsTypes";
 
 const initialState = {
   getuserloading: false,
   loading: false,
-  user: [],
+  user: {},
   error: "",
   authstate: false,
   socket: null,
-  posted: null,
-  accepted: null,
+  edited: null,
+  onlineusers: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -61,19 +61,16 @@ const authReducer = (state = initialState, action) => {
         authstate: false,
         socket: null,
       };
-
-    case POSTED: {
+    case EDIT_DATA:
       return {
         ...state,
-        posted: action.payload,
+        edited: action.payload,
       };
-    }
-    case ACCEPTED: {
+    case ONLINE_USERS:
       return {
         ...state,
-        accepted: action.payload,
+        onlineusers: action.payload,
       };
-    }
     default:
       return state;
   }

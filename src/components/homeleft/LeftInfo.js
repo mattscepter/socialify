@@ -7,7 +7,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { useSelector, useDispatch } from "react-redux";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 import { CircularProgress } from "@material-ui/core";
-import { posted } from "../../context/actions/authactions";
+import { posted } from "../../context/actions/postactions";
 
 function LeftInfo() {
   const dispatch = useDispatch();
@@ -44,6 +44,8 @@ function LeftInfo() {
     imageFormObj.append("userId", user.userId);
     imageFormObj.append("title", title);
     imageFormObj.append("caption", caption);
+    imageFormObj.append("userName", user.userName);
+    imageFormObj.append("profileImg", user.profileImg);
 
     await axiosInstance
       .post("/post/addpost", imageFormObj)

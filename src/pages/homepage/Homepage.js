@@ -9,28 +9,11 @@ import axiosInstance from "../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 
 function Homepage() {
-  const [follow, setfollow] = useState({});
   const [postcount, setpostcount] = useState();
   const user = useSelector((state) => state.auth.user);
   const posted = useSelector((state) => state.auth.posted);
-  const accepted = useSelector((state) => state.auth.accepted);
-
   const tablet = useMediaQuery("(max-width:1073px)");
   const mobile = useMediaQuery("(max-width:710px)");
-
-  useEffect(() => {
-    const getfollow = async () => {
-      await axiosInstance
-        .get(`/api/follower/${user.userId}`)
-        .then(async (res) => {
-          setfollow(res.data);
-        })
-        .catch((err) => {
-          console.log(err.response.data.error);
-        });
-    };
-    getfollow();
-  }, [user.userId, accepted]);
 
   useEffect(() => {
     const getPostCount = async () => {
@@ -44,6 +27,9 @@ function Homepage() {
         });
     };
     getPostCount();
+    return function cleanup() {
+      getPostCount();
+    };
   }, [user.userId, posted]);
 
   return (
@@ -65,8 +51,8 @@ function Homepage() {
           <div className="homeright">
             <div className="homeright__absolute">
               <div className="homeright__relative">
-                {!tablet && <RightInfo postcount={postcount} follow={follow} />}
-                <Requests follow={follow} />
+                {!tablet && <RightInfo postcount={postcount} />}
+                <Requests />
                 {tablet && <LeftInfo />}
               </div>
             </div>

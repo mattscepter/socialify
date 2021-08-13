@@ -13,11 +13,8 @@ import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 import Comment from "../comment/Comment";
 
 function Post({ postdata }) {
-  const [user, setUser] = useState({});
-  const [likes, setLikes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
-  const [likenumber, setLikeNumber] = useState();
-  const [loading, setLoading] = useState(false);
+  const [likenumber, setLikeNumber] = useState(postdata.likes.length);
   const [commentLoading, setCommmentLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
@@ -26,42 +23,10 @@ function Post({ postdata }) {
   const baseURL = `${process.env.REACT_APP_UPLOAD}/posts/${postdata.imgPath}`;
 
   useEffect(() => {
-    const getUser = async () => {
-      setLoading(true);
-      await axiosInstance
-        .get(`/auth/user/${postdata.userId}`)
-        .then(async (res) => {
-          await axiosInstance
-            .get(`/post/likes/${postdata._id}`)
-            .then((response) => {
-              setLikeNumber(response.data.likes.length);
-              setLikes(response.data.likes);
-              setUser(res.data.user);
-              setLoading(false);
-            })
-            .catch((err) => {
-              console.log(err);
-              setLoading(false);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
-    };
-    getUser();
-    return function cleanup() {
-      getUser();
-    };
-  }, [postdata.userId, postdata._id]);
-
-  useEffect(() => {}, [likes]);
-
-  useEffect(() => {
-    if (likes.includes(User.userId)) {
+    if (postdata.likes.includes(User.userId)) {
       setIsLiked(true);
     }
-  }, [User.userId, likes]);
+  }, [User.userId, postdata.likes]);
 
   const likePost = async (e) => {
     e.preventDefault();
@@ -96,7 +61,11 @@ function Post({ postdata }) {
       .get(`/comments/getcomment/${postdata._id}`)
       .then(async (res) => {
         setCommmentLoading(false);
-        setComments(res.data.comment);
+        setComments(
+          res.data.comment.sort((p1, p2) => {
+            return new Date(p2.createdAt) - new Date(p1.createdAt);
+          })
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -124,83 +93,29 @@ function Post({ postdata }) {
       <div className="post">
         <div
           onClick={() => {
-            history.push(`/profile/${user.userId}`);
+            history.push(`/profile/${postdata.userId}`);
           }}
           className="post__header"
           style={{ cursor: "pointer" }}
         >
-          {loading ? (
-            <>
-              {" "}
-              <Skeleton
-                animation="wave"
-                variant="circle"
-                style={{
-                  width: "4rem",
-                  height: "4rem",
-                  margin: "0.8rem",
-                  marginLeft: "0",
-                }}
-              />{" "}
-              <Skeleton
-                animation="wave"
-                variant="rect"
-                style={{
-                  width: "10rem",
-                  height: "2rem",
-                  margin: "0.8rem",
-                  marginLeft: "0",
-                  borderRadius: "0.5rem",
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <Avatar
-                src={`${
-                  user.profileImg !== ""
-                    ? `${process.env.REACT_APP_UPLOAD}/profilepic/${user.profileImg}`
-                    : ""
-                }`}
-                style={{ height: "3rem", width: "3rem" }}
-              />
-              <h2>{user.userName}</h2>
-            </>
-          )}
+          <Avatar
+            src={`${
+              postdata.profileImg !== ""
+                ? `${process.env.REACT_APP_UPLOAD}/profilepic/${postdata.profileImg}`
+                : ""
+            }`}
+            style={{ height: "3rem", width: "3rem" }}
+          />
+          <h2>{postdata.userName}</h2>
         </div>
-        <div className="post__caption">
-          {loading ? (
-            <>
-              <Skeleton
-                animation="wave"
-                variant="rect"
-                style={{
-                  width: "30rem",
-                  height: "1.5rem",
-                  margin: "0.8rem",
-                  marginLeft: "0",
-                  borderRadius: "0.5rem",
-                }}
-              />
-              <Skeleton
-                animation="wave"
-                variant="rect"
-                style={{
-                  width: "25rem",
-                  height: "1rem",
-                  margin: "0.8rem",
-                  marginLeft: "0",
-                  borderRadius: "0.5rem",
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <h3>{postdata.title}</h3>
-              <p>{postdata.caption}</p>
-            </>
-          )}
-        </div>
+        {postdata.title !== "" || postdata.caption !== "" ? (
+          <div className="post__caption">
+            <h3>{postdata.title}</h3>
+            <p>{postdata.caption}</p>
+          </div>
+        ) : (
+          <></>
+        )}
         {postdata.imgPath !== "" ? (
           <div className="post__image">
             <img src={baseURL} alt="" />
@@ -220,23 +135,7 @@ function Post({ postdata }) {
                 style={{ color: `${isLiked ? "red" : "lightgrey"}` }}
               />
             </IconButton>
-            {loading ? (
-              <>
-                <Skeleton
-                  animation="wave"
-                  variant="rect"
-                  style={{
-                    width: "10rem",
-                    height: "1rem",
-                    margin: "0.8rem",
-                    marginLeft: "0",
-                    borderRadius: "0.5rem",
-                  }}
-                />
-              </>
-            ) : (
-              <p>{likenumber} people liked it</p>
-            )}
+            <p>{likenumber} people liked it</p>
           </div>
         </div>
         <div className="post__timestamp">
@@ -331,4 +230,4 @@ function Post({ postdata }) {
   );
 }
 
-export default Post;
+export default React.memo(Post);

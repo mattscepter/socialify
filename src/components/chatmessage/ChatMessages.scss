@@ -1,0 +1,111 @@
+@import "../../scss/mixin/mixin.scss";
+@import "../../scss/variables/variables.scss";
+
+.chatmessages {
+  width: 63%;
+  height: 100%;
+  &__header {
+    background-color: $colorsecondry;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    &Left {
+      display: flex;
+      align-items: center;
+
+      &Avatar {
+        height: 4rem !important;
+        width: 4rem !important;
+      }
+
+      &Detail {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+        &Username {
+          font-size: 1.8rem;
+          font-weight: 400;
+          color: $colorbase;
+        }
+
+        p {
+          font-size: 1.3rem;
+          color: $colorbase;
+          font-weight: 300;
+        }
+      }
+    }
+
+    &Right {
+      display: flex;
+      align-items: center;
+
+      p {
+        font-size: 1.7rem;
+        color: $colorbase;
+        font-weight: 300;
+        margin-right: 3rem;
+      }
+    }
+  }
+
+  &__body {
+    position: relative;
+    height: 85%;
+    background-color: $colorbase;
+    border-bottom: 1px solid lightgray;
+
+    &Scroll {
+      height: 100% !important;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    height: 7%;
+    background-color: white;
+
+    textarea {
+      outline-width: 0;
+      border: 0;
+      background-color: rgb(247, 247, 247);
+      border-bottom: 1px solid $colortertiary;
+      font-family: "poppins", "sans-serif";
+      font-size: 1.5rem;
+      @include input(0.85rem);
+      padding: 0.5rem !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      resize: none;
+      height: 2.2rem !important;
+      width: 87%;
+    }
+
+    &SendButton {
+      height: 5rem !important;
+      width: 5rem !important;
+
+      &Icon {
+        font-size: 3rem !important;
+      }
+
+      &:hover &Icon {
+        color: $colortertiary !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .chatmessages {
+    width: 100%;
+    &__header {
+      padding-left: 0;
+    }
+  }
+}

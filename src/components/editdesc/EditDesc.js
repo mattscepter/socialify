@@ -13,15 +13,16 @@ import Compressor from "compressorjs";
 import PhotoIcon from "@material-ui/icons/Photo";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 import axiosInstance from "../../utils/axiosInstance";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../authentication/form.scss";
+import { editdata } from "../../context/actions/authactions";
 
 function EditDesc({ seteditDisplay, user, setpostdeleted }) {
-  const currentUser = useSelector((state) => state.user);
-
-  const [disc, setdisc] = useState(user.user.discription);
+  const currentUser = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const [disc, setdisc] = useState(currentUser.discription);
   const [imgDisp, setImgDisp] = useState(
-    `${process.env.REACT_APP_UPLOAD}/profilepic/${user.user.profileImg}`
+    `${process.env.REACT_APP_UPLOAD}/profilepic/${currentUser.profileImg}`
   );
   const [loading, setLoading] = useState(false);
   const [removeImg, setRemoveImg] = useState(false);
@@ -58,7 +59,7 @@ function EditDesc({ seteditDisplay, user, setpostdeleted }) {
     imageFormObj.append("userId", currentUser.userId);
     imageFormObj.append("discription", disc);
     imageFormObj.append("updateImg", removeImg);
-    imageFormObj.append("profilePic", user.user.profileImg);
+    imageFormObj.append("profilePic", currentUser.profileImg);
     await axiosInstance
       .patch("/data/userdata", imageFormObj)
       .then((res) => {
@@ -66,6 +67,7 @@ function EditDesc({ seteditDisplay, user, setpostdeleted }) {
         setLoading(false);
         seteditDisplay(false);
         setpostdeleted(imgDisp);
+        dispatch(editdata(disc));
       })
       .then((err) => {
         setLoading(false);
@@ -137,7 +139,6 @@ function EditDesc({ seteditDisplay, user, setpostdeleted }) {
       <div className="removeImg">
         <Switch
           checked={removeImg}
-          color=""
           onChange={(e) => {
             if (!removeImg) {
               setImgDisp("");

@@ -1,0 +1,77 @@
+@import "../../scss/mixin/mixin.scss";
+@import "../../scss/variables/variables.scss";
+
+.followercard {
+  position: relative;
+  width: 42rem;
+  max-height: 30rem;
+  padding: 1rem;
+  padding-right: 0;
+  padding-left: 0.5rem;
+  background-color: white;
+  border-radius: 0.7rem;
+  @include shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    @include header(2.3rem);
+    text-align: center;
+  }
+
+  &__List {
+    width: 100%;
+    padding-right: 0 !important;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    &User {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border-radius: 0.7rem;
+      cursor: pointer;
+
+      &Left {
+        display: flex;
+        align-items: center;
+        width: 60%;
+        &Name {
+          margin-left: 1rem;
+          h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+          }
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      button {
+        @include button(0.65rem);
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .followercard {
+    width: 40rem;
+
+    &__List {
+      &User {
+        &Left {
+          width: 55%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import "../../scss/variables/variables.scss";
+
+.conversation {
+  display: flex;
+  align-items: center;
+  padding: 2.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  height: 4.5rem;
+  border-bottom: 1px solid rgba($colorprimary, $alpha: 0.08);
+  cursor: pointer;
+
+  &__avatar {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  &__username {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-left: 1.5rem;
+  }
+
+  &:hover {
+    background-color: $colorbase;
+  }
+}

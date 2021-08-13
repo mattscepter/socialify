@@ -4,13 +4,14 @@ import "./Profile.scss";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import axiosInstance from "../../utils/axiosInstance";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Comment from "../comment/Comment";
 import Socialify from "../../assets/photos/SocialifyMain.svg";
 import Skeleton from "@material-ui/lab/Skeleton";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Post from "../post/Post";
+import { posted } from "../../context/actions/postactions";
 
 function Profile({ setDisplay, post, user, postdeleted, setpostSelected }) {
   const User = useSelector((state) => state.auth.user);
@@ -21,8 +22,9 @@ function Profile({ setDisplay, post, user, postdeleted, setpostSelected }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [commentLoading, setCommmentLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const mobile = useMediaQuery("(max-width:700px)");
+  const mobile = useMediaQuery("(max-width:812px)");
 
   useEffect(() => {
     const getUser = async () => {
@@ -103,6 +105,7 @@ function Profile({ setDisplay, post, user, postdeleted, setpostSelected }) {
     await axiosInstance
       .delete(`post/deletepost/${post._id}`)
       .then((res) => {
+        dispatch(posted(post._id));
         setDisplay(false);
         postdeleted(res);
       })

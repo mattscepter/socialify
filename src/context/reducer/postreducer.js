@@ -2,12 +2,14 @@ import {
   GETPOST_LOADING,
   GETPOST_SUCCESS,
   GETPOST_ERROR,
+  POSTED,
 } from "../actionsTypes";
 
 const initialState = {
   loading: false,
   posts: [],
   error: "",
+  posted: null,
 };
 
 const postReducer = (state = initialState, action) => {
@@ -19,14 +21,21 @@ const postReducer = (state = initialState, action) => {
       };
     case GETPOST_SUCCESS:
       return {
-        loading: false,
+        ...state,
         posts: action.payload,
         error: "",
+        loading: false,
       };
     case GETPOST_ERROR:
       return {
         ...state,
         error: action.payload,
+        loading: false,
+      };
+    case POSTED:
+      return {
+        ...state,
+        posted: action.payload,
       };
     default:
       return state;

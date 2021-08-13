@@ -1,0 +1,71 @@
+@import "../../scss/mixin/mixin.scss";
+
+.chatpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__body {
+    margin-top: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    @include shadow;
+    display: flex;
+    overflow: hidden;
+    height: 80rem;
+    width: 120rem;
+
+    &Sidebar {
+      flex: 0.3;
+      width: 100%;
+    }
+    &Message {
+      flex: 0.7;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1073px) {
+  .chatpage {
+    &__body {
+      margin-top: 0.5rem;
+      height: 92vh;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .chatpage {
+    &__body {
+      width: 100vw;
+    }
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .chatpage {
+    &__body {
+      margin-top: 0.5rem;
+      height: 85.5vh;
+      width: 100vw;
+    }
+  }
+}
+
+@media screen and(max-width:600px) {
+  .chatpage {
+    &__body {
+      margin-left: 10vw;
+      margin-right: 10vw;
+    }
+  }
+}
+
+@media screen and(max-width:500px) {
+  .chatpage {
+    &__body {
+      margin-left: 0rem;
+      margin-right: 0rem;
+    }
+  }
+}

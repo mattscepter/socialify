@@ -3,9 +3,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGOUT_USER,
-  POSTED,
-  ACCEPTED,
   GETUSER_LOADING,
+  EDIT_DATA,
+  ONLINE_USERS,
 } from "../actionsTypes";
 import cookie from "js-cookie";
 import axiosInstance from "../../utils/axiosInstance";
@@ -32,13 +32,13 @@ const logoutUser = () => ({
   type: LOGOUT_USER,
 });
 
-const posted = (data) => ({
-  type: POSTED,
+const editdata = (data) => ({
+  type: EDIT_DATA,
   payload: data,
 });
 
-const accepted = (data) => ({
-  type: ACCEPTED,
+const setonlineusers = (data) => ({
+  type: ONLINE_USERS,
   payload: data,
 });
 
@@ -48,7 +48,6 @@ const loginUser = (user) => {
     axiosInstance
       .post("/auth/signin", user)
       .then((res) => {
-        console.log("loggedin");
         if (res.data.token) {
           const socket = io.connect(process.env.REACT_APP_BASE_URL);
           socket.emit("addUser", res.data.user.userId);
@@ -91,9 +90,9 @@ export {
   loginSuccess,
   loginError,
   logoutUser,
-  posted,
-  accepted,
   fetchUserToken,
   loginUser,
   getuserloading,
+  editdata,
+  setonlineusers,
 };

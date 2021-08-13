@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ProfilePage.scss";
 import { Avatar, Button, IconButton } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axiosInstance from "../../utils/axiosInstance";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
@@ -9,69 +9,58 @@ import ProfilePost from "../../components/profilePost/ProfilePost";
 import EditIcon from "@material-ui/icons/Edit";
 import EditDesc from "../../components/editdesc/EditDesc";
 import { CircularProgress } from "@material-ui/core";
+import { showfollowers } from "../../context/actions/followeractions";
+import {
+  getPostCount,
+  getProfileFOllowers,
+  getProfilePost,
+  getProfileUser,
+} from "../../context/actions/profileactions";
+import { useHistory } from "react-router";
+import { addConvo } from "../../context/actions/convoactions";
 
 function ProfilePage() {
   const [editDisplay, seteditDisplay] = useState(false);
   const currentUser = useSelector((state) => state.auth.user);
-  const [follow, setfollow] = useState({});
-  const [postcount, setpostcount] = useState();
   const [buttonStatus, setButtonStatus] = useState("Follow");
   const [buttonLoading, setButtonLoading] = useState(false);
   const [postdeleted, setpostdeleted] = useState();
   const [postSelected, setpostSelected] = useState(false);
-  const [user, setUser] = useState({
-    loading: false,
-    user: {},
-  });
+  const [unfollowed, setunfollowed] = useState();
+  const history = useHistory();
+  const dispatch = useDispatch();
   let { id } = useParams();
+  const follow = useSelector((state) => state.profile.followers);
+  const postcount = useSelector((state) => state.profile.postcount);
+  const user = useSelector((state) => state.profile.user);
+  const loading = useSelector((state) => state.profile.profileloading);
+  const convo = useSelector((state) => state.convo.convo);
 
   useEffect(() => {
-    if (follow.followers && follow.followers.includes(currentUser.userId)) {
+    dispatch(getPostCount(id));
+  }, [dispatch, id, postdeleted]);
+
+  useEffect(() => {
+    dispatch(getProfileFOllowers(id));
+  }, [dispatch, id, unfollowed]);
+
+  useEffect(() => {
+    dispatch(getProfileUser(id));
+  }, [dispatch, id]);
+  useEffect(() => {
+    dispatch(getProfilePost(id));
+  }, [dispatch, id, postdeleted]);
+
+  useEffect(() => {
+    if (follow?.followers && follow?.followers.includes(currentUser.userId)) {
       setButtonStatus("Unfollow");
     } else if (
-      follow.requests &&
-      follow.requests.includes(currentUser.userId)
+      follow?.requests &&
+      follow?.requests.includes(currentUser.userId)
     ) {
       setButtonStatus("Requested");
     }
-  }, [currentUser.userId, follow.followers, follow.requests]);
-
-  useEffect(() => {
-    const getfollow = async () => {
-      setUser({
-        loading: true,
-        user: {},
-      });
-      await axiosInstance
-        .get(`/auth/user/${id}`)
-        .then(async (response) => {
-          await axiosInstance
-            .get(`/api/follower/${id}`)
-            .then(async (res) => {
-              await axiosInstance
-                .get(`/post/postcount/${id}`)
-                .then((respon) => {
-                  setUser({
-                    loading: false,
-                    user: response.data.user,
-                  });
-                  setpostcount(respon.data);
-                  setfollow(res.data);
-                })
-                .catch((err) => {
-                  if (err.response) console.log(err.response.data.error);
-                });
-            })
-            .catch((err) => {
-              console.log(err.response.data.error);
-            });
-        })
-        .catch((err) => {
-          console.log(err.response.data.error);
-        });
-    };
-    getfollow();
-  }, [id, postdeleted]);
+  }, [currentUser.userId, follow]);
 
   const followUser = async () => {
     setButtonLoading(true);
@@ -92,10 +81,11 @@ function ProfilePage() {
     await axiosInstance
       .post("/api/unfollow", { userId: currentUser.userId, followerId: id })
       .then((res) => {
-        const index = follow.followers?.indexOf(currentUser.userId);
+        const index = follow?.followers?.indexOf(currentUser.userId);
         if (index > -1) {
-          follow.followers?.splice(index, 1);
+          follow?.followers?.splice(index, 1);
         }
+        setunfollowed(res);
         setButtonLoading(false);
         setButtonStatus("Follow");
       })
@@ -135,7 +125,7 @@ function ProfilePage() {
 
   return (
     <>
-      {user.loading ? (
+      {loading ? (
         <Loading />
       ) : (
         <div className="profilePage">
@@ -169,14 +159,14 @@ function ProfilePage() {
               </>
             )}
             <Avatar
-              src={`${process.env.REACT_APP_UPLOAD}/profilepic/${user.user.profileImg}`}
+              src={`${process.env.REACT_APP_UPLOAD}/profilepic/${user.profileImg}`}
               className="profilePage__header-Avatar"
             />
-            <h2>{user.user.userName}</h2>
+            <h2>{user.userName}</h2>
           </div>
           <div className="profilePage__desc">
-            <h2>{user.user.name}</h2>
-            <p>{user.user.discription}</p>
+            <h2>{user.name}</h2>
+            <p>{user.discription}</p>
             {currentUser.userId === id ? (
               <></>
             ) : (
@@ -201,6 +191,32 @@ function ProfilePage() {
                     <>{buttonStatus}</>
                   )}
                 </Button>
+                {follow?.followers.includes(currentUser.userId) ||
+                follow?.following.includes(currentUser.userId) ? (
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(
+                        addConvo(
+                          {
+                            name: user.name,
+                            userName: user.userName,
+                            profileImg: user.profileImg,
+                            _id: user.userId,
+                          },
+                          currentUser,
+                          convo,
+                          user.profileImg
+                        )
+                      );
+                      history.push("/chat");
+                    }}
+                  >
+                    Chat
+                  </Button>
+                ) : (
+                  <></>
+                )}
               </>
             )}
           </div>
@@ -209,21 +225,67 @@ function ProfilePage() {
               <h4>Posts</h4>
               <h5>{postcount}</h5>
             </div>
-            <div className="profilePage__followersBox">
+            <div
+              onClick={() => {
+                if (currentUser.userId === id) {
+                  dispatch(
+                    showfollowers({
+                      type: "Followers",
+                      show: true,
+                      data: [],
+                      id: currentUser.userId,
+                    })
+                  );
+                } else if (buttonStatus === "Unfollow") {
+                  dispatch(
+                    showfollowers({
+                      type: "Followers",
+                      show: true,
+                      data: follow.followers,
+                      id: id,
+                    })
+                  );
+                }
+              }}
+              className="profilePage__followersBox"
+            >
               <h4>Followers</h4>
-              <h5>{follow.followers?.length}</h5>
+              <h5>{follow?.followers?.length}</h5>
             </div>
-            <div className="profilePage__followersBox">
+            <div
+              onClick={() => {
+                if (currentUser.userId === id) {
+                  dispatch(
+                    showfollowers({
+                      type: "Following",
+                      show: true,
+                      data: [],
+                      id: currentUser.userId,
+                    })
+                  );
+                } else if (buttonStatus === "Unfollow") {
+                  dispatch(
+                    showfollowers({
+                      type: "Following",
+                      show: true,
+                      data: follow.following,
+                      id: id,
+                    })
+                  );
+                }
+              }}
+              className="profilePage__followersBox"
+            >
               <h4>Following</h4>
-              <h5>{follow.following?.length}</h5>
+              <h5>{follow?.following?.length}</h5>
             </div>
           </div>
           <div className="profilePage__post">
             <h3 className="profilePage__postH3">Posts</h3>
             {currentUser.userId === id ||
-            follow.followers?.includes(currentUser.userId) ? (
+            follow?.followers?.includes(currentUser.userId) ? (
               <ProfilePost
-                user={user.user}
+                user={user}
                 setpostdeleted={setpostdeleted}
                 setpostSelected={setpostSelected}
               />

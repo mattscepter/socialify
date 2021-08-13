@@ -12,7 +12,7 @@
 
   &__header {
     padding-left: 1.5rem;
-    height: 7vh;
+    height: 6vh;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba($colorprimary, $alpha: 0.12);
@@ -43,10 +43,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    max-height: 65vh;
-    overflow: hidden;
+    background-color: rgb(245, 245, 245);
     img {
-      max-width: 100%;
+      object-fit: cover;
+      max-height: 55rem;
     }
   }
 
@@ -87,8 +87,9 @@
   }
 
   &__comment {
-    padding: 1.5rem;
-    padding-top: 0.8rem;
+    padding: 1rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0;
 
     &Add {
       display: flex;
@@ -104,9 +105,8 @@
         width: 60%;
         font-family: "poppins", "sans-serif";
         resize: none;
-        height: 2.8rem;
+        height: 2.2rem;
         border-radius: 0;
-
         &::-webkit-scrollbar {
           display: none;
         }
@@ -159,7 +159,7 @@
   margin: 0 !important;
 }
 .MuiAccordionSummary-root.Mui-expanded {
-  min-height: 48px !important;
+  min-height: 40px !important;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {
@@ -174,5 +174,15 @@
 @media screen and (max-width: 400px) {
   .post {
     width: 100vw;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .post {
+    &__image {
+      img {
+        max-height: 37rem;
+      }
+    }
   }
 }

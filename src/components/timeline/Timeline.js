@@ -1,28 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Timeline.scss";
 import Post from "../post/Post";
-import { useSelector, useDispatch } from "react-redux";
-import Loading from "../../components/loading/Loading";
-import { getPosts } from "../../context/actions/postactions";
+import { useSelector } from "react-redux";
+import PostLoading from "../post/PostLoading";
 
 function Timeline() {
-  const posted = useSelector((state) => state.auth.posted);
-  const user = useSelector((state) => state.auth.user);
-  const post = useSelector((state) => state.posts.posts);
-  const loading = useSelector((state) => state.posts.loading);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts(user));
-  }, [dispatch, user, posted]);
-
+  const post = useSelector((state) => state.posts);
   return (
     <>
-      {loading ? (
-        <Loading />
+      {post.loading ? (
+        <PostLoading />
       ) : (
-        <div className="timeline">
-          {post?.length === 0 ? (
+        <div className="timeline" style={{ overflowX: "hidden" }}>
+          {post.posts.length !== 0 ? (
+            <>
+              {post.posts.map((p) => {
+                return <Post postdata={p} key={p._id} />;
+              })}
+            </>
+          ) : (
             <p
               style={{
                 fontSize: "2.5rem",
@@ -34,12 +30,6 @@ function Timeline() {
             >
               No post available
             </p>
-          ) : (
-            <>
-              {post.map((p) => {
-                return <Post postdata={p} key={p._id} />;
-              })}
-            </>
           )}
         </div>
       )}

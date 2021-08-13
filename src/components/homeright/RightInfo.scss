@@ -60,6 +60,7 @@
         align-items: center;
         justify-content: centre;
         width: 33%;
+        cursor: pointer;
 
         h4 {
           @include header;
@@ -73,4 +74,9 @@
       }
     }
   }
+}
+
+.rightinfo__followerCard {
+  position: fixed;
+  top: 0;
 }

@@ -2,6 +2,7 @@ import {
   GETPOST_LOADING,
   GETPOST_SUCCESS,
   GETPOST_ERROR,
+  POSTED,
 } from "../actionsTypes";
 import axiosInstance from "../../utils/axiosInstance";
 
@@ -16,6 +17,11 @@ const getpostSuccess = (data) => ({
 
 const getpostError = (data) => ({
   type: GETPOST_ERROR,
+  payload: data,
+});
+
+const posted = (data) => ({
+  type: POSTED,
   payload: data,
 });
 
@@ -39,4 +45,4 @@ const getPosts = (user) => {
   };
 };
 
-export { getpostLoading, getpostSuccess, getpostError, getPosts };
+export { getpostLoading, getpostSuccess, getpostError, getPosts, posted };

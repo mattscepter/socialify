@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./Request.scss";
 import axiosInstance from "../../utils/axiosInstance";
 import { useDispatch } from "react-redux";
-import { accepted } from "../../context/actions/authactions";
+import { accepted } from "../../context/actions/followeractions";
 
 function Request({ request, currentUser }) {
   const [user, setuser] = useState({});

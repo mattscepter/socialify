@@ -156,8 +156,7 @@
     &cancelButton {
       position: absolute !important;
       z-index: 1000 !important;
-      top: -6rem;
-      right: -1.5rem;
+      right: 0rem;
       cursor: pointer;
 
       &Icon {
@@ -173,8 +172,8 @@
     &deleteButton {
       position: absolute !important;
       z-index: 1000 !important;
-      top: 1.5rem;
-      right: 2rem;
+      top: 1.5rem !important;
+      right: 6rem;
       cursor: pointer;
       height: 4rem !important;
       width: 4rem !important;

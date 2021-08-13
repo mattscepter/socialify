@@ -22,6 +22,7 @@ function BottomNav({ setAddPostDisp, setrequestsdisp, requests }) {
           icon={<HomeIcon className="bottomnav__icon" />}
         />
         <BottomNavigationAction
+          onClick={() => history.push("/chat")}
           icon={<ChatRoundedIcon className="bottomnav__icon" />}
         />
         <BottomNavigationAction

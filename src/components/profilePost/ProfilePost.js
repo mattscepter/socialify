@@ -1,39 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Profile from "../profile/Profile";
-import axiosInstance from "../../utils/axiosInstance";
 import Socialify from "../../assets/photos/SocialifyMain.svg";
 import "./ProfilePost.scss";
 import { CircularProgress } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 function ProfilePost({ user, setpostdeleted, setpostSelected }) {
   const [display, setDisplay] = useState(false);
-  const [userPost, setUserPost] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
-
-  useEffect(() => {
-    const getPost = async () => {
-      setLoading(true);
-      await axiosInstance
-        .get(`/post/getpost/${user.userId}`)
-        .then((res) => {
-          setLoading(false);
-          setUserPost(
-            res.data.sort((p1, p2) => {
-              return new Date(p2.createdAt) - new Date(p1.createdAt);
-            })
-          );
-        })
-        .catch((err) => {
-          setLoading(false);
-          console.log(err);
-        });
-    };
-    getPost();
-    return function cleanup() {
-      getPost();
-    };
-  }, [user]);
+  const loading = useSelector((state) => state.profile.profilepostloading);
+  const userPost = useSelector((state) => state.profile.post);
 
   return (
     <>

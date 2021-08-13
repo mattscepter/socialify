@@ -67,6 +67,7 @@ function Header() {
                         {searchedUser.map((s) => {
                           return (
                             <div
+                              key={s._id}
                               onClick={() => {
                                 setdisplay(false);
                                 history.push(`/profile/${s._id}`);
@@ -74,7 +75,7 @@ function Header() {
                               className="headerweb__searchBoxResultContainerOptions"
                             >
                               <Avatar
-                                src={`${process.env.REACT_APP_UPLOAD}/profilepic/${s.profileImg}`}
+                                src={`${process.env.REACT_APP_UPLOAD}profilepic/${s.profileImg}`}
                                 style={{ width: "3rem", height: "3rem" }}
                               />
                               <div>
@@ -112,7 +113,10 @@ function Header() {
               >
                 <HomeIcon className="headerweb__icon" />
               </IconButton>
-              <IconButton style={{ height: "4.5rem", width: "4.5rem" }}>
+              <IconButton
+                onClick={() => history.push("/chat")}
+                style={{ height: "4.5rem", width: "4.5rem" }}
+              >
                 <ChatRoundedIcon
                   className="headerweb__icon"
                   style={{ paddingTop: "1.5rem" }}
@@ -132,7 +136,7 @@ function Header() {
               >
                 <Avatar
                   className="headerweb__avatar"
-                  src={`${process.env.REACT_APP_UPLOAD}/profilepic/${currentUser.profileImg}`}
+                  src={`${process.env.REACT_APP_UPLOAD}profilepic/${currentUser.profileImg}`}
                 />
               </IconButton>
             </div>
@@ -179,6 +183,7 @@ function Header() {
                         {searchedUser.map((s) => {
                           return (
                             <div
+                              key={s._id}
                               onClick={() => {
                                 setdisplay(false);
                                 history.push(`/profile/${s._id}`);
