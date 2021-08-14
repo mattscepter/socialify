@@ -106,5 +106,8 @@
     &__header {
       padding-left: 0;
     }
+    &__body {
+      height: calc(100vh - 30.5rem) !important;
+    }
   }
 }
