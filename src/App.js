@@ -59,7 +59,7 @@ function App() {
     return function cleanup() {
       dispatch(getFollowerData(follower.followers));
     };
-  }, [dispatch, follower.followers]);
+  }, [dispatch, follower.followers, follower.accepted]);
 
   useEffect(() => {
     dispatch(getFollowingData(follower.following));
