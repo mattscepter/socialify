@@ -7,6 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { useSelector, useDispatch } from "react-redux";
 import { addConvo } from "../../context/actions/convoactions";
 import BadgeAvatars from "../avatar/BadgeAvatar";
+import ScrollableFeed from "react-scrollable-feed";
 
 function ChatSidebar({ setChatDisplay }) {
   const [search, setsearch] = useState("");
@@ -107,19 +108,21 @@ function ChatSidebar({ setChatDisplay }) {
           </div>
         </ClickAwayListener>
       </div>
-      <div className="sidebar__conversations">
-        {convo?.map((c) => {
-          return (
-            <div key={c._id}>
-              <Conversation
-                convo={c}
-                userId={user.userId}
-                setChatDisplay={setChatDisplay}
-              />
-            </div>
-          );
-        })}
-      </div>
+      <ScrollableFeed>
+        <div className="sidebar__conversations">
+          {convo?.map((c) => {
+            return (
+              <div key={c._id}>
+                <Conversation
+                  convo={c}
+                  userId={user.userId}
+                  setChatDisplay={setChatDisplay}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </ScrollableFeed>
     </div>
   );
 }

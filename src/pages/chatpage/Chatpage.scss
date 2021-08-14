@@ -11,7 +11,6 @@
     @include shadow;
     display: flex;
     overflow: hidden;
-    height: 80rem;
     width: 120rem;
 
     &Sidebar {
@@ -29,7 +28,7 @@
   .chatpage {
     &__body {
       margin-top: 0.5rem;
-      height: 92vh;
+      // height: 92vh;
     }
   }
 }
@@ -46,7 +45,7 @@
   .chatpage {
     &__body {
       margin-top: 0.5rem;
-      height: 85.5vh;
+      // height: 85.5vh;
       width: 100vw;
     }
   }

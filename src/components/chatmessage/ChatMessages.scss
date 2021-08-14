@@ -3,10 +3,9 @@
 
 .chatmessages {
   width: 63%;
-  height: 100%;
   &__header {
     background-color: $colorsecondry;
-    height: 8%;
+    height: 5.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -55,7 +54,7 @@
 
   &__body {
     position: relative;
-    height: 85%;
+    height: calc(100vh - 23.5rem) !important;
     background-color: $colorbase;
     border-bottom: 1px solid lightgray;
 
@@ -67,7 +66,7 @@
   &__footer {
     display: flex;
     align-items: center;
-    height: 7%;
+    height: 5rem;
     background-color: white;
 
     textarea {

@@ -3,12 +3,11 @@
 
 .sidebar {
   width: 37%;
-  height: 100%;
   background-color: white;
   border-right: 1px solid rgba($colorprimary, $alpha: 0.2);
 
   &__header {
-    height: 8%;
+    height: 5.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,6 +20,10 @@
         text-align: left;
       }
     }
+  }
+
+  &__conversations {
+    height: calc(100vh - 19rem) !important;
   }
 }
 
